@@ -31,7 +31,7 @@ jobs:
     - name: Archive APK
       uses: actions/upload-artifact@v3
       with:
-        name: release-apk
+        name: TechieAi-android
         path: build/app/outputs/flutter-apk/app-release.apk
 
   build-windows:
@@ -53,13 +53,13 @@ jobs:
       run: flutter test
 
     - name: Build Windows app
-      run: flutter build windows
+      run: flutter build windows --release
 
     - name: Archive Windows app
       uses: actions/upload-artifact@v3
       with:
-        name: release-windows
-        path: build/windows/runner/Release/
+        name: TechieAi-windows
+        path: build/windows/x64/Release/techie_ai.exe # Adjusted for x64 architecture
 
   build-web:
     runs-on: ubuntu-latest
@@ -85,5 +85,5 @@ jobs:
     - name: Archive web app
       uses: actions/upload-artifact@v3
       with:
-        name: release-web
+        name: TechieAi-web
         path: build/web/
