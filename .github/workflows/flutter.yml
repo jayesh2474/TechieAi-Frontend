@@ -61,39 +61,6 @@ jobs:
         name: release-windows
         path: build/windows/runner/Release/
 
-  build-ios:
-    runs-on: macos-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.22.2' # Using Flutter version 3.22.2
-
-    - name: Install dependencies
-      run: flutter pub get
-
-    - name: Run tests
-      run: flutter test
-
-    - name: Set up Xcode
-      run: sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
-
-    - name: Install CocoaPods
-      run: sudo gem install cocoapods
-
-    - name: Build iOS app
-      run: flutter build ipa --release
-
-    - name: Archive iOS app
-      uses: actions/upload-artifact@v3
-      with:
-        name: release-ios
-        path: build/ios/ipa/*.ipa
-
   build-web:
     runs-on: ubuntu-latest
 
