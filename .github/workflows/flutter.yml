@@ -8,17 +8,16 @@ on:
 
 jobs:
   build-android:
-
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.22.2' # Replace with your desired Flutter version
+        flutter-version: '3.22.2' # Using Flutter version 3.22.2
 
     - name: Install dependencies
       run: flutter pub get
@@ -30,9 +29,9 @@ jobs:
       run: flutter build apk --release
 
     - name: Archive APK
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
-        name: release-apk
+        name: TechieAi-android
         path: build/app/outputs/flutter-apk/app-release.apk
 
   build-windows:
@@ -40,12 +39,12 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.22.2' # Replace with your desired Flutter version
+        flutter-version: '3.22.2' # Using Flutter version 3.22.2
 
     - name: Install dependencies
       run: flutter pub get
@@ -57,55 +56,22 @@ jobs:
       run: flutter build windows --release
 
     - name: Archive Windows app
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
-        name: release-windows
-        path: build/windows/runner/Release/
-
-  build-ios:
-    runs-on: macos-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.22.2' # Replace with your desired Flutter version
-
-    - name: Install dependencies
-      run: flutter pub get
-
-    - name: Run tests
-      run: flutter test
-
-    - name: Set up Xcode
-      run: sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
-
-    - name: Install CocoaPods
-      run: sudo gem install cocoapods
-
-    - name: Build iOS app
-      run: flutter build ios --release --no-codesign
-
-    - name: Archive iOS app
-      uses: actions/upload-artifact@v2
-      with:
-        name: release-ios
-        path: build/ios/iphoneos/
+        name: TechieAi-windows
+        path: build/windows/x64/Release/techie_ai.exe # Adjusted for x64 architecture
 
   build-web:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.22.2' # Replace with your desired Flutter version
+        flutter-version: '3.22.2' # Using Flutter version 3.22.2
 
     - name: Install dependencies
       run: flutter pub get
@@ -117,7 +83,7 @@ jobs:
       run: flutter build web --release
 
     - name: Archive web app
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
-        name: release-web
+        name: TechieAi-web
         path: build/web/
