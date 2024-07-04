@@ -8,17 +8,16 @@ on:
 
 jobs:
   build-android:
-
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.22.2' # Replace with your desired Flutter version
+        flutter-version: '3.22.2' # Using Flutter version 3.22.2
 
     - name: Install dependencies
       run: flutter pub get
@@ -30,7 +29,7 @@ jobs:
       run: flutter build apk --release
 
     - name: Archive APK
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: release-apk
         path: build/app/outputs/flutter-apk/app-release.apk
@@ -40,12 +39,12 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.22.2' # Replace with your desired Flutter version
+        flutter-version: '3.22.2' # Using Flutter version 3.22.2
 
     - name: Install dependencies
       run: flutter pub get
@@ -54,10 +53,10 @@ jobs:
       run: flutter test
 
     - name: Build Windows app
-      run: flutter build windows --release
+      run: flutter build windows
 
     - name: Archive Windows app
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: release-windows
         path: build/windows/runner/Release/
@@ -67,12 +66,12 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.22.2' # Replace with your desired Flutter version
+        flutter-version: '3.22.2' # Using Flutter version 3.22.2
 
     - name: Install dependencies
       run: flutter pub get
@@ -87,25 +86,25 @@ jobs:
       run: sudo gem install cocoapods
 
     - name: Build iOS app
-      run: flutter build ios --release --no-codesign
+      run: flutter build ipa --release
 
     - name: Archive iOS app
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: release-ios
-        path: build/ios/iphoneos/
+        path: build/ios/ipa/*.ipa
 
   build-web:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.22.2' # Replace with your desired Flutter version
+        flutter-version: '3.22.2' # Using Flutter version 3.22.2
 
     - name: Install dependencies
       run: flutter pub get
@@ -117,7 +116,7 @@ jobs:
       run: flutter build web --release
 
     - name: Archive web app
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: release-web
         path: build/web/
