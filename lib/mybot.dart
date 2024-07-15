@@ -14,7 +14,9 @@ class _ChatBotState extends State<ChatBot> {
 
   List<ChatMessage> allmessages = [];
 
-  getdata(ChatMessage m) {
+  void getdata(ChatMessage m) {
+    // Trim leading and trailing spaces from message text
+    m.text = m.text.trim();
     allmessages.insert(0, m);
     setState(() {
 
@@ -30,6 +32,7 @@ class _ChatBotState extends State<ChatBot> {
         getdata(m);
       },
       messages: allmessages,
+      
     ));
   }
 }
